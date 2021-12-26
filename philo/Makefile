@@ -1,4 +1,5 @@
 SOURCES_FILES	=	main.c init_philo.c utils.c ft_atoi.c debug.c
+SOURCES_FILES	+=	ft_free_ptr.c
 
 SOURCES_BONUS	=
 
@@ -22,7 +23,8 @@ NAME_BONUS		=	philo_bonus
 CC				=	gcc
 RM				=	rm -rf
 
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -g3
+LDFLAGS			=	-pthread
 
 $(OBJ_DIR)/%.o:		$(SOURCES_DIR)/%.c $(HEADER)
 					$(CC) $(CFLAGS) -c $< -o $@
@@ -35,10 +37,10 @@ all:				$(NAME)
 bonus:				$(NAME_BONUS)
 
 $(NAME):			$(LIBFT) $(OBJ_DIR) $(OBJECTS) $(HEADER)
-					$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) -o $(NAME)
+					$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(LDFLAGS) -o $(NAME)
 
 $(NAME_BONUS):		$(LIBFT) $(OBJ_DIR) $(OBJECTS_BONUS) $(HEADER_BONUS)
-					$(CC) $(CFLAGS) $(OBJECTS_BONUS) $(LIBFT) -o $(NAME_BONUS)
+					$(CC) $(CFLAGS) $(OBJECTS_BONUS) $(LIBFT) $(LDFLAGS) -o $(NAME_BONUS)
 
 $(LIBFT):
 					$(MAKE) -C $(LIBFT_PATH) bonus

@@ -6,28 +6,44 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/26 00:18:16 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/26 03:50:41 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	get_args(int argc, char **argv, t_args	*args)
+void	init_philo(pthread_mutex_t **forks, t_philosopher **philos)
 {
-	if (argc == 5 || argc == 6)
+	*forks = NULL;
+	*philos = NULL;
+}
+
+void	deinit_philo(int number_of_philos,
+		pthread_mutex_t *forks, t_philosopher *philos)
+{
+	int	i;
+
+	printf("number_of_philos %d\n", number_of_philos);
+	i = -1;
+	while (++i < number_of_philos)
 	{
-		args->number_of_philos = ft_atoi(argv[1]);
-		args->time_to_die = ft_atoi(argv[2]);
-		args->time_to_eat = ft_atoi(argv[3]);
-		args->time_to_sleep = ft_atoi(argv[4]);
-		if (argc == 6)
-			args->times_must_eat = ft_atoi(argv[5]);
-		return (0);
+		// pthread_mutex_destroy(&forks[i]);
+		// printf("destroy %d\n", i);
+		printf("name %d %d\n", i, philos[i].name);
 	}
-	else if (argc > 6)
-		printf("Too many args!\n");
-	else
-		printf("Too few args!\n");
-	exit (EXIT_FAILURE);
-	return (0);
+	free(forks);
+	free(philos);
+}
+
+void	exit_philo(int number_of_philos,
+		pthread_mutex_t *forks, t_philosopher *philos, int code)
+{
+	int	i;
+
+	i = -1;
+	while (++i < number_of_philos)
+		pthread_mutex_destroy(&forks[i]);
+	free(forks);
+	free(philos);
+	exit(code);
 }
