@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/26 07:38:43 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/26 07:45:45 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_args(int argc, char **argv, t_args *args)
 	exit (EXIT_FAILURE);
 }
 
-void	init_philo(pthread_mutex_t **forks, t_philo **philos)
+void	init_data(pthread_mutex_t **forks, t_philo **philos)
 {
 	*forks = NULL;
 	*philos = NULL;

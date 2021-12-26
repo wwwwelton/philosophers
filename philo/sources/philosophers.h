@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/26 07:43:36 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/26 07:45:54 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_philo
 }	t_philo;
 
 void	init_args(int argc, char **argv, t_args *args);
-void	init_philo(pthread_mutex_t **forks, t_philo **philos);
+void	init_data(pthread_mutex_t **forks, t_philo **philos);
 void	init_forks(int n, t_mutex **forks, t_philo **philos);
 void	init_philosophers(int n, t_mutex **forks, t_philo **philos);
 
