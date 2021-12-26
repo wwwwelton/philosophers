@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/26 07:45:45 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/26 09:19:10 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	init_forks(int n, t_mutex **forks, t_philo **philos)
 		pthread_mutex_init(&(*forks)[i], NULL);
 }
 
-void	init_philosophers(int n, t_mutex **forks, t_philo **philos)
+void	init_philos(int n, t_args *args, t_mutex **forks, t_philo **philos)
 {
 	int	i;
 
@@ -66,11 +66,13 @@ void	init_philosophers(int n, t_mutex **forks, t_philo **philos)
 	i = -1;
 	while (++i < (n - 1))
 	{
-		(*philos)[i].fork_left = forks[i];
-		(*philos)[i].fork_right = forks[(i + 1) % n];
+		(*philos)[i].fork_left = &(*forks)[i];
+		(*philos)[i].fork_right = &(*forks)[(i + 1) % n];
 		(*philos)[i].name = i + 1;
+		(*philos)[i].args = args;
 	}
-	(*philos)[i].fork_left = forks[(i + 1) % n];
-	(*philos)[i].fork_right = forks[i];
+	(*philos)[i].fork_left = &(*forks)[(i + 1) % n];
+	(*philos)[i].fork_right = &(*forks)[i];
 	(*philos)[i].name = i + 1;
+	(*philos)[i].args = args;
 }
