@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/26 00:16:37 by wleite           ###   ########.fr       */
+/*   Created: 2021/12/26 00:13:55 by wleite            #+#    #+#             */
+/*   Updated: 2021/12/26 00:14:31 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#include "philosophers.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-
-typedef struct s_args
+int	ft_atoi(const char *nptr)
 {
-	unsigned int	number_of_philos;
-	unsigned int	time_to_die;
-	unsigned int	time_to_eat;
-	unsigned int	time_to_sleep;
-	unsigned int	times_must_eat;
+	int		sign;
+	int		res;
 
-}	t_args;
-
-int	init_philo(t_args *args);
-int	get_args(int argc, char **argv, t_args	*args);
-int	ft_atoi(const char *nptr);
-
-#endif
+	while ((*nptr && *nptr == ' ') || (*nptr >= 9 && *nptr <= 13))
+		nptr++;
+	sign = 1;
+	if (*nptr == '-' || *nptr == '+')
+	{
+		if (*nptr == '-')
+			sign = -sign;
+		nptr++;
+	}
+	res = 0;
+	while (*nptr && (*nptr >= '0' && *nptr <= '9'))
+	{
+		res = (res * 10) + (*nptr - '0');
+		nptr++;
+	}
+	return (res * sign);
+}
