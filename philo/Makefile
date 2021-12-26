@@ -1,5 +1,5 @@
 SOURCES_FILES	=	main.c init_philo.c utils.c ft_atoi.c debug.c
-SOURCES_FILES	+=	ft_free_ptr.c exit.c
+SOURCES_FILES	+=	exit.c actions.c
 
 SOURCES_BONUS	=
 

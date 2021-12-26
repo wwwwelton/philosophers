@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/26 07:45:54 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/26 08:05:39 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ void	deinit_philo(int n, t_mutex *forks, t_philo *philos);
 void	exit_philo(int n, t_mutex *forks, t_philo *philos, int code);
 
 int		ft_atoi(const char *nptr);
-void	ft_free_ptr(void **ptr);
+
+void	*actions(void *ptr);
+int		start_philosophers(int n, t_philo *philos);
 
 void	print_args(t_args args);
 
