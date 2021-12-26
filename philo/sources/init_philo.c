@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/24 22:46:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/26 00:02:13 by wleite           ###   ########.fr       */
+/*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
+/*   Updated: 2021/12/26 00:00:43 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int argc, char **argv)
+int	init_philo(t_args *args)
 {
-	t_args	args;
-
-	(void)argc;
-	(void)argv;
-	init_philo(&args);
+	args->number_of_philos = 0;
+	args->time_to_die = 0;
+	args->time_to_eat = 0;
+	args->time_to_sleep = 0;
+	args->times_must_eat = 0;
 	return (0);
 }

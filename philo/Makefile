@@ -1,4 +1,4 @@
-SOURCES_FILES	=	main.c
+SOURCES_FILES	=	main.c init_philo.c
 
 SOURCES_BONUS	=
 
