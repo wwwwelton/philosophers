@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/27 18:46:12 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/27 19:05:51 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_right;
 	unsigned int	name;
 	unsigned int	meals;
+	long long		lastsupper;
 	pthread_t		thread;
 	t_args			*args;
 }	t_philo;

@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/27 18:29:40 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/27 19:06:14 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,13 @@ void	init_philos(int n, t_args *args, t_mutex **forks, t_philo **philos)
 		(*philos)[i].fork_right = &(*forks)[(i + 1) % n];
 		(*philos)[i].name = i + 1;
 		(*philos)[i].meals = 0;
+		(*philos)[i].lastsupper = 0;
 		(*philos)[i].args = args;
 	}
 	(*philos)[i].fork_left = &(*forks)[(i + 1) % n];
 	(*philos)[i].fork_right = &(*forks)[i];
 	(*philos)[i].name = i + 1;
 	(*philos)[i].meals = 0;
+	(*philos)[i].lastsupper = 0;
 	(*philos)[i].args = args;
 }
