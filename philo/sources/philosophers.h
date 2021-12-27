@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/27 18:09:30 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/27 18:46:12 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,5 @@ long long	timestamp(void);
 long long	timenow(long long firststamp);
 
 void		print_action(t_philo *philo, int action);
-
-void		print_args(t_args args);
 
 #endif

@@ -1,4 +1,4 @@
-SOURCES_FILES	=	main.c init_philo.c utils.c ft_atoi.c debug.c
+SOURCES_FILES	=	main.c init_philo.c utils.c ft_atoi.c
 SOURCES_FILES	+=	exit.c actions.c
 
 SOURCES_BONUS	=
