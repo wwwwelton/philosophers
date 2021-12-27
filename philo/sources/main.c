@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:46:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/26 09:39:23 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/27 16:52:20 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	t_philo	*philos;
 
 	init_args(argc, argv, &args);
-	init_data(&forks, &philos);
+	init_data(&args, &forks, &philos);
 	init_forks(args.number_of_philos, &forks, &philos);
 	init_philos(args.number_of_philos, &args, &forks, &philos);
 	start_philosophers(args.number_of_philos, philos);
