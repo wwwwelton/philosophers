@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/27 18:37:13 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/27 18:41:30 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	print_action(t_philo *philo, int action)
 	long long	current_time;
 
 	current_time = timenow(philo->args->firststamp);
+	pthread_mutex_lock(philo->args->writing);
 	if (action == TOOK_A_FORK)
 		printf("%5lld %3d has taken a fork\n", current_time, philo->name);
 	else if (action == EATING)
@@ -60,4 +61,5 @@ void	print_action(t_philo *philo, int action)
 		printf("%5lld %3d is sleeping\n", current_time, philo->name);
 	else if (action == THINKING)
 		printf("%5lld %3d is thinking\n", current_time, philo->name);
+	pthread_mutex_unlock(philo->args->writing);
 }
