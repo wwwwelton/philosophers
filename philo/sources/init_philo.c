@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/27 16:53:45 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/27 18:29:40 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ void	init_args(int argc, char **argv, t_args *args)
 void	init_data(t_args *args, pthread_mutex_t **forks, t_philo **philos)
 {
 	args->firststamp = timestamp();
+	args->writing = (t_mutex *)malloc(sizeof(t_mutex) * 1);
+	if (args->writing == NULL)
+	{
+		printf("Failed to alloc mutex!\n");
+		exit_philo (0, *forks, *philos, EXIT_FAILURE);
+	}
+	pthread_mutex_init(args->writing, NULL);
 	*forks = NULL;
 	*philos = NULL;
 }
@@ -76,5 +83,6 @@ void	init_philos(int n, t_args *args, t_mutex **forks, t_philo **philos)
 	(*philos)[i].fork_left = &(*forks)[(i + 1) % n];
 	(*philos)[i].fork_right = &(*forks)[i];
 	(*philos)[i].name = i + 1;
+	(*philos)[i].meals = 0;
 	(*philos)[i].args = args;
 }
