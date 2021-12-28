@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/27 23:52:08 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/28 03:07:36 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	start_philosophers(int n, t_philo *philos)
 	while (++i < n)
 	{
 		pthread_create(&philos[i].thread, NULL, &actions, &philos[i]);
-		msleep(10);
+		if (philos[i].name % 2 == 0)
+			msleep(10);
 	}
 	pthread_create(&monitor_thread, NULL, &philosopher_monitor, philos);
 	pthread_join(monitor_thread, NULL);
@@ -52,25 +53,24 @@ void	print_action(t_philo *philo, int action)
 
 void	*philosopher_monitor(void *ptr)
 {
-	int			i;
-	int			number_of_philos;
-	long long	current_time;
-	long long	time_to_die;
-	t_philo		*philos;
+	unsigned int	i;
+	long long		current_time;
+	long long		time_to_die;
+	t_philo			*philos;
 
 	while (1)
 	{
 		philos = (t_philo *)ptr;
-		number_of_philos = philos[0].args->number_of_philos;
 		time_to_die = philos[0].args->time_to_die;
 		i = -1;
-		while (++i < number_of_philos)
+		while (++i < philos[0].args->number_of_philos)
 		{
 			current_time = timenow(philos[0].args->firststamp);
 			if ((current_time - philos[i].lastsupper) > time_to_die)
 			{
 				philos[i].args->signal = 1;
-				print_action(&philos[i], DIED);
+				if (philos[i].meals != philos[i].args->times_must_eat)
+					print_action(&philos[i], DIED);
 				return (NULL);
 			}
 		}

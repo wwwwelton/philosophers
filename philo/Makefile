@@ -23,7 +23,7 @@ NAME_BONUS		=	philo_bonus
 CC				=	gcc
 RM				=	rm -rf
 
-CFLAGS			=	-Wall -Wextra -Werror -g3
+CFLAGS			=	-Wall -Wextra -Werror -g3 -fsanitize=address
 LDFLAGS			=	-pthread
 
 $(OBJ_DIR)/%.o:		$(SOURCES_DIR)/%.c $(HEADER)
@@ -40,7 +40,8 @@ $(NAME):			$(LIBFT) $(OBJ_DIR) $(OBJECTS) $(HEADER)
 					$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(LDFLAGS) -o $(NAME)
 
 $(NAME_BONUS):		$(LIBFT) $(OBJ_DIR) $(OBJECTS_BONUS) $(HEADER_BONUS)
-					$(CC) $(CFLAGS) $(OBJECTS_BONUS) $(LIBFT) $(LDFLAGS) -o $(NAME_BONUS)
+					$(CC) $(CFLAGS) $(OBJECTS_BONUS) $(LIBFT) \
+					$(LDFLAGS) -o $(NAME_BONUS)
 
 $(LIBFT):
 					$(MAKE) -C $(LIBFT_PATH) bonus
