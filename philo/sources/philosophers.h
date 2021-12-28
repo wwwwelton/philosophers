@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/27 19:05:51 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/27 22:24:32 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_args
 	unsigned int	time_to_sleep;
 	unsigned int	times_must_eat;
 	long long		firststamp;
+	int				signal;
 	pthread_mutex_t	*writing;
 }	t_args;
 
@@ -62,6 +63,7 @@ int			ft_atoi(const char *nptr);
 
 void		*actions(void *ptr);
 int			start_philosophers(int n, t_philo *philos);
+void		*philosopher_monitor(void *ptr);
 
 int			msleep(int time);
 long long	timestamp(void);

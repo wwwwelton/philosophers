@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/27 19:06:14 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/27 22:55:40 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_args(int argc, char **argv, t_args *args)
 
 void	init_data(t_args *args, pthread_mutex_t **forks, t_philo **philos)
 {
+	args->signal = 0;
 	args->firststamp = timestamp();
 	args->writing = (t_mutex *)malloc(sizeof(t_mutex) * 1);
 	if (args->writing == NULL)
