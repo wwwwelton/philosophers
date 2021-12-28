@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/27 22:57:27 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/27 23:52:08 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ void	*philosopher_monitor(void *ptr)
 			current_time = timenow(philos[0].args->firststamp);
 			if ((current_time - philos[i].lastsupper) > time_to_die)
 			{
-				print_action(&philos[i], DIED);
 				philos[i].args->signal = 1;
-				pthread_mutex_lock(philos[i].args->writing);
-				pthread_mutex_unlock(philos[i].args->writing);
+				print_action(&philos[i], DIED);
 				return (NULL);
 			}
 		}
