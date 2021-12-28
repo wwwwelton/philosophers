@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/28 03:44:56 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/28 04:34:49 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,33 @@ void	*philosopher_monitor(void *ptr)
 		}
 	}
 	return (NULL);
+}
+
+void	check_args(int argc, char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (++i < argc)
+	{
+		j = -1;
+		while (argv[i][++j])
+		{
+			if (!ft_isdigit(argv[i][j])
+				|| ft_atol(argv[i]) > 2147483647
+				|| ft_atol(argv[i]) == 0)
+			{
+				printf("Error!\n");
+				exit (EXIT_FAILURE);
+			}
+		}
+	}
+	if (argc > 6)
+		printf("Too many args!\n");
+	else if (argc < 5)
+		printf("Too few args!\n");
+	else
+		return ;
+	exit (EXIT_FAILURE);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_philo.c                                       :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/28 03:37:35 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/28 04:34:42 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,14 @@
 
 void	init_args(int argc, char **argv, t_data *data)
 {
-	if (argc == 5 || argc == 6)
-	{
-		data->number_of_philos = ft_atoi(argv[1]);
-		data->time_to_die = ft_atoi(argv[2]);
-		data->time_to_eat = ft_atoi(argv[3]);
-		data->time_to_sleep = ft_atoi(argv[4]);
-		data->times_must_eat = -1;
-		if (argc == 6)
-			data->times_must_eat = ft_atoi(argv[5]);
-		return ;
-	}
-	else if (argc > 6)
-		printf("Too many args!\n");
-	else
-		printf("Too few args!\n");
-	exit (EXIT_FAILURE);
+	check_args(argc, argv);
+	data->number_of_philos = ft_atoi(argv[1]);
+	data->time_to_die = ft_atoi(argv[2]);
+	data->time_to_eat = ft_atoi(argv[3]);
+	data->time_to_sleep = ft_atoi(argv[4]);
+	data->times_must_eat = -1;
+	if (argc == 6)
+		data->times_must_eat = ft_atoi(argv[5]);
 }
 
 void	init_data(t_data *data, pthread_mutex_t **forks, t_philo **philos)

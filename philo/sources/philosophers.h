@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/28 04:06:47 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/28 04:35:14 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,13 @@ typedef struct s_philo
 }	t_philo;
 
 int			ft_atoi(const char *nptr);
+long		ft_atol(const char *nptr);
+int			ft_isdigit(int c);
 int			msleep(int time);
 int			start_philosophers(int n, t_philo *philos);
 long long	timenow(long long firststamp);
 long long	timestamp(void);
+void		check_args(int argc, char **argv);
 void		deinit_philo(int n, t_mutex *forks, t_philo *philos);
 void		exit_philo(int n, t_mutex *forks, t_philo *philos);
 void		init_args(int argc, char **argv, t_data *data);
