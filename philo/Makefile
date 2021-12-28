@@ -1,5 +1,5 @@
-SOURCES_FILES	=	main.c init_philo.c utils.c ft_atoi.c
-SOURCES_FILES	+=	exit.c actions.c time_utils.c
+SOURCES_FILES	=	main.c init.c utils.c ft_atoi.c exit.c actions.c
+SOURCES_FILES	+=	time_utils.c
 
 SOURCES_BONUS	=
 
