@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/28 03:34:08 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/28 04:06:47 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,19 @@ typedef struct s_philo
 	t_data			*data;
 }	t_philo;
 
+int			ft_atoi(const char *nptr);
+int			msleep(int time);
+int			start_philosophers(int n, t_philo *philos);
+long long	timenow(long long firststamp);
+long long	timestamp(void);
+void		deinit_philo(int n, t_mutex *forks, t_philo *philos);
+void		exit_philo(int n, t_mutex *forks, t_philo *philos);
 void		init_args(int argc, char **argv, t_data *data);
 void		init_data(t_data *data, pthread_mutex_t **forks, t_philo **philos);
 void		init_forks(int n, t_mutex **forks, t_philo **philos);
 void		init_philos(int n, t_data *data, t_mutex **forks, t_philo **philos);
-
-void		deinit_philo(int n, t_mutex *forks, t_philo *philos);
-void		exit_philo(int n, t_mutex *forks, t_philo *philos);
-
-int			ft_atoi(const char *nptr);
-
-void		*actions(void *ptr);
-int			start_philosophers(int n, t_philo *philos);
-void		*philosopher_monitor(void *ptr);
-
-int			msleep(int time);
-long long	timestamp(void);
-long long	timenow(long long firststamp);
-
 void		print_action(t_philo *philo, int action);
+void		*actions(void *ptr);
+void		*philosopher_monitor(void *ptr);
 
 #endif
