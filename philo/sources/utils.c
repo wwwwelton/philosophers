@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/28 03:37:05 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/28 03:44:56 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ void	*philosopher_monitor(void *ptr)
 	while (1)
 	{
 		philos = (t_philo *)ptr;
-		time_to_die = philos[0].data->time_to_die;
+		time_to_die = philos->data->time_to_die;
 		i = -1;
-		while (++i < philos[0].data->number_of_philos)
+		while (++i < philos->data->number_of_philos)
 		{
-			current_time = timenow(philos[0].data->firststamp);
+			current_time = timenow(philos->data->firststamp);
 			if ((current_time - philos[i].lastsupper) > time_to_die)
 			{
 				philos[i].data->signal = 1;
