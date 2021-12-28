@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/28 04:34:49 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/28 18:31:55 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	start_philosophers(int n, t_philo *philos)
 	int			i;
 	pthread_t	monitor_thread;
 
+	philos->data->firststamp = timestamp();
 	i = -1;
 	while (++i < n)
 	{
@@ -58,19 +59,21 @@ void	*philosopher_monitor(void *ptr)
 	long long		time_to_die;
 	t_philo			*philos;
 
+	philos = (t_philo *)ptr;
+	time_to_die = philos->data->time_to_die;
 	while (1)
 	{
-		philos = (t_philo *)ptr;
-		time_to_die = philos->data->time_to_die;
 		i = -1;
 		while (++i < philos->data->number_of_philos)
 		{
 			current_time = timenow(philos->data->firststamp);
 			if ((current_time - philos[i].lastsupper) > time_to_die)
 			{
-				philos[i].data->signal = 1;
 				if (philos[i].meals != philos[i].data->times_must_eat)
+				{
+					philos[i].data->signal = 1;
 					print_action(&philos[i], DIED);
+				}
 				return (NULL);
 			}
 		}
