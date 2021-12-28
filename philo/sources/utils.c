@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/28 03:19:35 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/28 03:37:05 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	print_action(t_philo *philo, int action)
 {
 	long long	current_time;
 
-	current_time = timenow(philo->args->firststamp);
-	pthread_mutex_lock(philo->args->writing);
+	current_time = timenow(philo->data->firststamp);
+	pthread_mutex_lock(philo->data->writing);
 	if (action == TOOK_A_FORK)
 		printf("%5lld %3d has taken a fork\n", current_time, philo->name);
 	else if (action == EATING)
@@ -48,7 +48,7 @@ void	print_action(t_philo *philo, int action)
 		printf("%5lld %3d is thinking\n", current_time, philo->name);
 	else if (action == DIED)
 		printf("%5lld %3d died\n", current_time, philo->name);
-	pthread_mutex_unlock(philo->args->writing);
+	pthread_mutex_unlock(philo->data->writing);
 }
 
 void	*philosopher_monitor(void *ptr)
@@ -61,15 +61,15 @@ void	*philosopher_monitor(void *ptr)
 	while (1)
 	{
 		philos = (t_philo *)ptr;
-		time_to_die = philos[0].args->time_to_die;
+		time_to_die = philos[0].data->time_to_die;
 		i = -1;
-		while (++i < philos[0].args->number_of_philos)
+		while (++i < philos[0].data->number_of_philos)
 		{
-			current_time = timenow(philos[0].args->firststamp);
+			current_time = timenow(philos[0].data->firststamp);
 			if ((current_time - philos[i].lastsupper) > time_to_die)
 			{
-				philos[i].args->signal = 1;
-				if (philos[i].meals != philos[i].args->times_must_eat)
+				philos[i].data->signal = 1;
+				if (philos[i].meals != philos[i].data->times_must_eat)
 					print_action(&philos[i], DIED);
 				return (NULL);
 			}

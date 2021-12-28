@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/28 03:25:56 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/28 03:34:08 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef pthread_mutex_t	t_mutex;
 # define THINKING 4
 # define DIED 5
 
-typedef struct s_args
+typedef struct s_data
 {
 	unsigned int	number_of_philos;
 	unsigned int	time_to_die;
@@ -39,7 +39,7 @@ typedef struct s_args
 	int				alone;
 	int				signal;
 	pthread_mutex_t	*writing;
-}	t_args;
+}	t_data;
 
 typedef struct s_philo
 {
@@ -49,13 +49,13 @@ typedef struct s_philo
 	unsigned int	meals;
 	long long		lastsupper;
 	pthread_t		thread;
-	t_args			*args;
+	t_data			*data;
 }	t_philo;
 
-void		init_args(int argc, char **argv, t_args *args);
-void		init_data(t_args *args, pthread_mutex_t **forks, t_philo **philos);
+void		init_args(int argc, char **argv, t_data *data);
+void		init_data(t_data *data, pthread_mutex_t **forks, t_philo **philos);
 void		init_forks(int n, t_mutex **forks, t_philo **philos);
-void		init_philos(int n, t_args *args, t_mutex **forks, t_philo **philos);
+void		init_philos(int n, t_data *data, t_mutex **forks, t_philo **philos);
 
 void		deinit_philo(int n, t_mutex *forks, t_philo *philos);
 void		exit_philo(int n, t_mutex *forks, t_philo *philos);

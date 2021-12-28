@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:46:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/27 16:52:20 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/28 03:34:36 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 int	main(int argc, char **argv)
 {
 	t_mutex	*forks;
-	t_args	args;
+	t_data	data;
 	t_philo	*philos;
 
-	init_args(argc, argv, &args);
-	init_data(&args, &forks, &philos);
-	init_forks(args.number_of_philos, &forks, &philos);
-	init_philos(args.number_of_philos, &args, &forks, &philos);
-	start_philosophers(args.number_of_philos, philos);
-	deinit_philo(args.number_of_philos, forks, philos);
+	init_args(argc, argv, &data);
+	init_data(&data, &forks, &philos);
+	init_forks(data.number_of_philos, &forks, &philos);
+	init_philos(data.number_of_philos, &data, &forks, &philos);
+	start_philosophers(data.number_of_philos, philos);
+	deinit_philo(data.number_of_philos, forks, philos);
 	return (0);
 }

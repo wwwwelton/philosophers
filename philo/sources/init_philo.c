@@ -6,23 +6,23 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/28 03:27:02 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/28 03:37:35 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	init_args(int argc, char **argv, t_args *args)
+void	init_args(int argc, char **argv, t_data *data)
 {
 	if (argc == 5 || argc == 6)
 	{
-		args->number_of_philos = ft_atoi(argv[1]);
-		args->time_to_die = ft_atoi(argv[2]);
-		args->time_to_eat = ft_atoi(argv[3]);
-		args->time_to_sleep = ft_atoi(argv[4]);
-		args->times_must_eat = -1;
+		data->number_of_philos = ft_atoi(argv[1]);
+		data->time_to_die = ft_atoi(argv[2]);
+		data->time_to_eat = ft_atoi(argv[3]);
+		data->time_to_sleep = ft_atoi(argv[4]);
+		data->times_must_eat = -1;
 		if (argc == 6)
-			args->times_must_eat = ft_atoi(argv[5]);
+			data->times_must_eat = ft_atoi(argv[5]);
 		return ;
 	}
 	else if (argc > 6)
@@ -32,21 +32,21 @@ void	init_args(int argc, char **argv, t_args *args)
 	exit (EXIT_FAILURE);
 }
 
-void	init_data(t_args *args, pthread_mutex_t **forks, t_philo **philos)
+void	init_data(t_data *data, pthread_mutex_t **forks, t_philo **philos)
 {
-	if (args->number_of_philos == 1)
-		args->alone = 1;
+	if (data->number_of_philos == 1)
+		data->alone = 1;
 	else
-		args->alone = 0;
-	args->signal = 0;
-	args->firststamp = timestamp();
-	args->writing = (t_mutex *)malloc(sizeof(t_mutex) * 1);
-	if (args->writing == NULL)
+		data->alone = 0;
+	data->signal = 0;
+	data->firststamp = timestamp();
+	data->writing = (t_mutex *)malloc(sizeof(t_mutex) * 1);
+	if (data->writing == NULL)
 	{
 		printf("Failed to alloc mutex!\n");
 		exit_philo (0, *forks, *philos);
 	}
-	pthread_mutex_init(args->writing, NULL);
+	pthread_mutex_init(data->writing, NULL);
 	*forks = NULL;
 	*philos = NULL;
 }
@@ -66,7 +66,7 @@ void	init_forks(int n, t_mutex **forks, t_philo **philos)
 		pthread_mutex_init(&(*forks)[i], NULL);
 }
 
-void	init_philos(int n, t_args *args, t_mutex **forks, t_philo **philos)
+void	init_philos(int n, t_data *data, t_mutex **forks, t_philo **philos)
 {
 	int	i;
 
@@ -84,12 +84,12 @@ void	init_philos(int n, t_args *args, t_mutex **forks, t_philo **philos)
 		(*philos)[i].name = i + 1;
 		(*philos)[i].meals = 0;
 		(*philos)[i].lastsupper = 0;
-		(*philos)[i].args = args;
+		(*philos)[i].data = data;
 	}
 	(*philos)[i].fork_left = &(*forks)[(i + 1) % n];
 	(*philos)[i].fork_right = &(*forks)[i];
 	(*philos)[i].name = i + 1;
 	(*philos)[i].meals = 0;
 	(*philos)[i].lastsupper = 0;
-	(*philos)[i].args = args;
+	(*philos)[i].data = data;
 }
