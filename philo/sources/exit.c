@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/27 18:33:32 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/28 03:26:07 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	deinit_philo(int n, t_mutex *forks, t_philo *philos)
 	free(philos);
 }
 
-void	exit_philo(int n, t_mutex *forks, t_philo *philos, int code)
+void	exit_philo(int n, t_mutex *forks, t_philo *philos)
 {
 	int	i;
 
@@ -36,5 +36,5 @@ void	exit_philo(int n, t_mutex *forks, t_philo *philos, int code)
 	free(philos[0].args->writing);
 	free(forks);
 	free(philos);
-	exit(code);
+	exit(EXIT_FAILURE);
 }
