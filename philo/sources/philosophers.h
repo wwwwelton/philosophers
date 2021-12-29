@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/28 04:35:14 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/28 23:58:58 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_data
 	unsigned int	time_to_eat;
 	unsigned int	time_to_sleep;
 	unsigned int	times_must_eat;
-	long long		firststamp;
+	long			firststamp;
 	int				alone;
 	int				signal;
 	pthread_mutex_t	*writing;
@@ -47,7 +47,7 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_right;
 	unsigned int	name;
 	unsigned int	meals;
-	long long		lastsupper;
+	long			lastsupper;
 	pthread_t		thread;
 	t_data			*data;
 }	t_philo;
@@ -57,8 +57,8 @@ long		ft_atol(const char *nptr);
 int			ft_isdigit(int c);
 int			msleep(int time);
 int			start_philosophers(int n, t_philo *philos);
-long long	timenow(long long firststamp);
-long long	timestamp(void);
+long		timenow(long firststamp);
+long		timestamp(void);
 void		check_args(int argc, char **argv);
 void		deinit_philo(int n, t_mutex *forks, t_philo *philos);
 void		exit_philo(int n, t_mutex *forks, t_philo *philos);

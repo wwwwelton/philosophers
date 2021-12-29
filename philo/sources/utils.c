@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 00:55:55 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 00:03:14 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,28 @@ int	start_philosophers(int n, t_philo *philos)
 
 void	print_action(t_philo *philo, int action)
 {
-	long long	current_time;
+	long	current_time;
 
 	current_time = timenow(philo->data->firststamp);
 	pthread_mutex_lock(philo->data->writing);
 	if (action == TOOK_A_FORK)
-		printf("%5lld %3d has taken a fork\n", current_time, philo->name);
+		printf("%5ld %3d has taken a fork\n", current_time, philo->name);
 	else if (action == EATING)
-		printf("%5lld %3d is eating\n", current_time, philo->name);
+		printf("%5ld %3d is eating\n", current_time, philo->name);
 	else if (action == SLEEPING)
-		printf("%5lld %3d is sleeping\n", current_time, philo->name);
+		printf("%5ld %3d is sleeping\n", current_time, philo->name);
 	else if (action == THINKING)
-		printf("%5lld %3d is thinking\n", current_time, philo->name);
+		printf("%5ld %3d is thinking\n", current_time, philo->name);
 	else if (action == DIED)
-		printf("%5lld %3d died\n", current_time, philo->name);
+		printf("%5ld %3d died\n", current_time, philo->name);
 	pthread_mutex_unlock(philo->data->writing);
 }
 
 void	*philosopher_monitor(void *ptr)
 {
 	unsigned int	i;
-	long long		current_time;
-	long long		time_to_die;
+	long			current_time;
+	long			time_to_die;
 	t_philo			*philos;
 
 	philos = (t_philo *)ptr;

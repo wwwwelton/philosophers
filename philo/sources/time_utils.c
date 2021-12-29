@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 21:25:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/27 21:25:19 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/28 23:16:09 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	msleep(int time)
 	return (time * 1000);
 }
 
-long long	timestamp(void)
+long	timestamp(void)
 {
 	struct timeval	time;
 
@@ -26,7 +26,7 @@ long long	timestamp(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-long long	timenow(long long firststamp)
+long	timenow(long firststamp)
 {
 	return (timestamp() - firststamp);
 }
