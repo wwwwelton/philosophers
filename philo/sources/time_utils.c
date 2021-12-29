@@ -6,21 +6,19 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 21:25:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 18:46:20 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 20:41:05 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	msleep(int time)
+void	msleep(int time_in_ms)
 {
 	long	start_time;
 
-	start_time = 0;
 	start_time = timestamp();
-	while ((timestamp() - start_time) < (long)time)
+	while ((timestamp() - start_time) < (long)time_in_ms)
 		usleep(10);
-	return (1);
 }
 
 long	timestamp(void)
