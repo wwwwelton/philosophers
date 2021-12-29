@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:46:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/28 03:34:36 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 03:00:24 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 int	main(int argc, char **argv)
 {
-	t_mutex	*forks;
 	t_data	data;
+	t_mutex	*forks;
 	t_philo	*philos;
 
 	init_args(argc, argv, &data);

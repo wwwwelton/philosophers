@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 02:33:14 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 03:00:40 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,5 @@ void	print_action(t_philo *philo, int action)
 void	try_lock(t_philo *philo)
 {
 	while (philo->fork_right->__align && philo->fork_left->__align)
-		usleep(1);
+		usleep(10);
 }
