@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/28 18:27:56 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/28 23:57:58 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,14 @@ void	init_philos(int n, t_data *data, t_mutex **forks, t_philo **philos)
 		exit_philo (n, *forks, *philos);
 	}
 	i = -1;
-	while (++i < (n - 1))
+	while (++i < n)
 	{
-		(*philos)[i].fork_left = &(*forks)[i];
-		(*philos)[i].fork_right = &(*forks)[(i + 1) % n];
+		(*philos)[i].fork_right = &(*forks)[i];
+		(*philos)[i].fork_left = &(*forks)[i + 1];
 		(*philos)[i].name = i + 1;
 		(*philos)[i].meals = 0;
 		(*philos)[i].lastsupper = 0;
 		(*philos)[i].data = data;
 	}
-	(*philos)[i].fork_left = &(*forks)[(i + 1) % n];
-	(*philos)[i].fork_right = &(*forks)[i];
-	(*philos)[i].name = i + 1;
-	(*philos)[i].meals = 0;
-	(*philos)[i].lastsupper = 0;
-	(*philos)[i].data = data;
+	(*philos)[--i].fork_left = &(*forks)[0];
 }

@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/28 18:31:55 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 00:55:55 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,15 @@ int	start_philosophers(int n, t_philo *philos)
 	int			i;
 	pthread_t	monitor_thread;
 
-	philos->data->firststamp = timestamp();
 	i = -1;
+	philos->data->firststamp = timestamp();
 	while (++i < n)
-	{
 		pthread_create(&philos[i].thread, NULL, &actions, &philos[i]);
-		if (philos[i].name % 2 == 0)
-			msleep(5);
-	}
 	pthread_create(&monitor_thread, NULL, &philosopher_monitor, philos);
-	pthread_join(monitor_thread, NULL);
 	i = -1;
 	while (++i < n)
 		pthread_join(philos[i].thread, NULL);
+	pthread_join(monitor_thread, NULL);
 	return (0);
 }
 
