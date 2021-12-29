@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 00:03:14 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 00:04:32 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	print_action(t_philo *philo, int action)
 
 	current_time = timenow(philo->data->firststamp);
 	pthread_mutex_lock(philo->data->writing);
-	if (action == TOOK_A_FORK)
+	if (action == TOOK_A_FORK && !philo->data->signal)
 		printf("%5ld %3d has taken a fork\n", current_time, philo->name);
-	else if (action == EATING)
+	else if (action == EATING && !philo->data->signal)
 		printf("%5ld %3d is eating\n", current_time, philo->name);
-	else if (action == SLEEPING)
+	else if (action == SLEEPING && !philo->data->signal)
 		printf("%5ld %3d is sleeping\n", current_time, philo->name);
-	else if (action == THINKING)
+	else if (action == THINKING && !philo->data->signal)
 		printf("%5ld %3d is thinking\n", current_time, philo->name);
 	else if (action == DIED)
 		printf("%5ld %3d died\n", current_time, philo->name);
