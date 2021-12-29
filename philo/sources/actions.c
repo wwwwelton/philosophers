@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 07:56:08 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 18:47:29 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 19:59:19 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	*actions(void *ptr)
 	t_philo	*philo;
 
 	philo = (t_philo *)ptr;
-	if (philo->name % 2)
-		msleep(5);
+	philo->started = 1;
+	waiter_is_ready(philo);
 	if (philo->data->alone)
 		return (go_eat_alone(philo));
 	while (!philo->data->dinner_is_over)

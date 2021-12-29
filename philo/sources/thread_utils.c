@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 07:55:47 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 19:46:09 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	start_philosophers(int n, t_philo *philos)
 	pthread_t	monitor_thread;
 
 	i = -1;
-	philos->data->firststamp = timestamp();
 	while (++i < n)
 		pthread_create(&philos[i].thread, NULL, &actions, &philos[i]);
 	pthread_create(&monitor_thread, NULL, &philosopher_monitor, philos);
@@ -46,6 +45,36 @@ static int	all_philos_ate(t_philo *philos)
 	return (0);
 }
 
+void	waiter_is_ready(t_philo *philo)
+{
+	while (!philo->ready)
+		;
+	if (philo->name % 2)
+		msleep(5);
+}
+
+void	wait_for_threads(t_philo *philos)
+{
+	int		i;
+	int		threads_started;
+
+	threads_started = 0;
+	while (threads_started != philos->data->number_of_philos)
+	{
+		i = -1;
+		threads_started = 0;
+		while (++i < philos->data->number_of_philos)
+		{
+			if (philos[i].started)
+				threads_started++;
+		}
+	}
+	philos->data->firststamp = timestamp();
+	i = -1;
+	while (++i < philos->data->number_of_philos)
+		philos[i].ready = 1;
+}
+
 void	*philosopher_monitor(void *ptr)
 {
 	int		i;
@@ -54,6 +83,7 @@ void	*philosopher_monitor(void *ptr)
 	t_philo	*philos;
 
 	philos = (t_philo *)ptr;
+	wait_for_threads(philos);
 	time_to_die = philos->data->time_to_die;
 	while (!all_philos_ate(philos))
 	{
@@ -68,7 +98,6 @@ void	*philosopher_monitor(void *ptr)
 				return (NULL);
 			}
 		}
-		msleep(1);
 	}
 	return (NULL);
 }

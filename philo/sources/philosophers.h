@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 18:45:03 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 19:18:14 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_philo
 {
 	int				name;
 	int				meals;
+	int				ready;
+	int				started;
 	long			lastsupper;
 	pthread_t		thread;
 	pthread_mutex_t	*fork_left;
@@ -67,6 +69,8 @@ void	init_data(t_data *data, pthread_mutex_t **forks, t_philo **philos);
 void	init_forks(int n, t_mutex **forks, t_philo **philos);
 void	init_philos(int n, t_data *data, t_mutex **forks, t_philo **philos);
 void	print_action(t_philo *philo, int action);
+void	waiter_is_ready(t_philo *philo);
+void	wait_for_threads(t_philo *philos);
 void	*actions(void *ptr);
 void	*philosopher_monitor(void *ptr);
 
