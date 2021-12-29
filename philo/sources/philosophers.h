@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 01:30:03 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 02:19:42 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,25 @@ typedef pthread_mutex_t	t_mutex;
 
 typedef struct s_data
 {
-	unsigned int	number_of_philos;
-	unsigned int	time_to_die;
-	unsigned int	time_to_eat;
-	unsigned int	time_to_sleep;
-	unsigned int	times_must_eat;
-	long			firststamp;
 	int				alone;
+	int				number_of_philos;
 	int				signal;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				times_must_eat;
+	long			firststamp;
 	pthread_mutex_t	*writing;
 }	t_data;
 
 typedef struct s_philo
 {
-	pthread_mutex_t	*fork_left;
-	pthread_mutex_t	*fork_right;
-	unsigned int	name;
-	unsigned int	meals;
+	int				name;
+	int				meals;
 	long			lastsupper;
 	pthread_t		thread;
+	pthread_mutex_t	*fork_left;
+	pthread_mutex_t	*fork_right;
 	t_data			*data;
 }	t_philo;
 

@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 01:29:43 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 02:17:42 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void	print_action(t_philo *philo, int action)
 
 void	*philosopher_monitor(void *ptr)
 {
-	unsigned int	i;
-	long			current_time;
-	long			time_to_die;
-	t_philo			*philos;
+	int		i;
+	long	current_time;
+	long	time_to_die;
+	t_philo	*philos;
 
 	philos = (t_philo *)ptr;
 	time_to_die = philos->data->time_to_die;
