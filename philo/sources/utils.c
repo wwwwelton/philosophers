@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 00:04:32 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 01:29:43 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,10 @@ void	check_args(int argc, char **argv)
 	else
 		return ;
 	exit (EXIT_FAILURE);
+}
+
+void	try_lock(t_philo *philo)
+{
+	while (philo->fork_right->__align && philo->fork_left->__align)
+		usleep(1);
 }
