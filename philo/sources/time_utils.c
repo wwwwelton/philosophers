@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 21:25:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 08:31:02 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 18:46:20 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	msleep(int time)
 {
-	long start_time;
+	long	start_time;
 
 	start_time = 0;
 	start_time = timestamp();

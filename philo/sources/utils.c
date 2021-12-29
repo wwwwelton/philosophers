@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 07:55:14 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 18:45:16 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,4 @@ void	print_action(t_philo *philo, int action)
 	else if (action == DIED)
 		printf("%5ld %3d died\n", current_time, philo->name);
 	pthread_mutex_unlock(philo->data->writing);
-}
-
-void	try_lock(t_philo *philo)
-{
-	while (philo->fork_right->__align && philo->fork_left->__align)
-		usleep(1);
 }
