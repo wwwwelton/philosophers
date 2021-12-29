@@ -36,15 +36,11 @@ all:				$(NAME)
 
 bonus:				$(NAME_BONUS)
 
-$(NAME):			$(LIBFT) $(OBJ_DIR) $(OBJECTS) $(HEADER)
-					$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) $(LDFLAGS) -o $(NAME)
+$(NAME):			$(OBJ_DIR) $(OBJECTS) $(HEADER)
+					$(CC) $(CFLAGS) $(OBJECTS) $(LDFLAGS) -o $(NAME)
 
-$(NAME_BONUS):		$(LIBFT) $(OBJ_DIR) $(OBJECTS_BONUS) $(HEADER_BONUS)
-					$(CC) $(CFLAGS) $(OBJECTS_BONUS) $(LIBFT) \
-					$(LDFLAGS) -o $(NAME_BONUS)
-
-$(LIBFT):
-					$(MAKE) -C $(LIBFT_PATH) bonus
+$(NAME_BONUS):		$(OBJ_DIR) $(OBJECTS_BONUS) $(HEADER_BONUS)
+					$(CC) $(CFLAGS) $(OBJECTS_BONUS) $(LDFLAGS) -o $(NAME_BONUS)
 
 $(OBJ_DIR):
 					mkdir -p $(OBJ_DIR)
