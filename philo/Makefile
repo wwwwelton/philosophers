@@ -1,5 +1,5 @@
 SOURCES_FILES	=	main.c init.c utils.c ft_atoi.c exit.c actions.c
-SOURCES_FILES	+=	time_utils.c ft_isdigit.c ft_atol.c
+SOURCES_FILES	+=	time_utils.c ft_isdigit.c ft_atol.c thread_utils.c
 
 SOURCES_BONUS	=
 
