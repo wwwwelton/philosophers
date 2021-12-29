@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 02:24:39 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 03:05:32 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_data
 {
 	int				alone;
 	int				number_of_philos;
-	int				signal;
+	int				dinner_is_over;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;

@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 07:56:08 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 01:30:19 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 03:16:26 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	go_eat(t_philo *philo)
 	try_lock(philo);
 	pthread_mutex_lock(philo->fork_right);
 	pthread_mutex_lock(philo->fork_left);
-	if (philo->data->signal)
+	if (philo->data->dinner_is_over)
 	{
 		pthread_mutex_unlock(philo->fork_right);
 		pthread_mutex_unlock(philo->fork_left);
@@ -59,7 +59,7 @@ void	*actions(void *ptr)
 	philo = (t_philo *)ptr;
 	if (philo->data->alone)
 		return (go_eat_alone(philo));
-	while (!philo->data->signal)
+	while (!philo->data->dinner_is_over)
 	{
 		go_eat(philo);
 		if (philo->meals == philo->data->times_must_eat)

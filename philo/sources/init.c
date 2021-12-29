@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/28 23:57:58 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 03:06:28 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_data(t_data *data, pthread_mutex_t **forks, t_philo **philos)
 		data->alone = 1;
 	else
 		data->alone = 0;
-	data->signal = 0;
+	data->dinner_is_over = 0;
 	data->firststamp = 0;
 	data->writing = (t_mutex *)malloc(sizeof(t_mutex) * 1);
 	if (data->writing == NULL)
