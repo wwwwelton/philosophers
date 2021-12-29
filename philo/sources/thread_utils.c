@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 03:06:28 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/29 07:55:47 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	*philosopher_monitor(void *ptr)
 				return (NULL);
 			}
 		}
-		usleep(10);
+		msleep(1);
 	}
 	return (NULL);
 }
