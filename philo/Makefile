@@ -1,15 +1,18 @@
 SOURCES_FILES	=	actions.c exit.c ft_atoi.c ft_atol.c ft_isdigit.c
 SOURCES_FILES	+=	init.c main.c thread_utils.c time_utils.c utils.c
 
-SOURCES_BONUS	=
+SOURCES_BONUS	=	actions_bonus.c exit_bonus.c ft_atoi_bonus.c
+SOURCES_BONUS	+=	ft_atol_bonus.c ft_isdigit_bonus.c init_bonus.c
+SOURCES_BONUS	+=	main_bonus.c philosophers_bonus.h thread_utils_bonus.c
+SOURCES_BONUS	+=	time_utils_bonus.c utils_bonus.c
 
 SOURCES_DIR		=	sources
-BONUS_DIR		=
+BONUS_DIR		=	sources_bonus
 
 OBJ_DIR			=	objects
 
 HEADER			=	$(SOURCES_DIR)/philosophers.h
-HEADER_BONUS	=	$(BONUS_DIR)/philosophers.h
+HEADER_BONUS	=	$(BONUS_DIR)/philosophers_bonus.h
 
 SOURCES			=	$(addprefix $(SOURCES_DIR)/, $(SOURCES_FILES))
 BONUS_FILES		=	$(addprefix $(BONUS_DIR)/, $(SOURCES_BONUS))
