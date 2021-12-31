@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 07:56:08 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 18:47:29 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 18:24:36 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	go_sleep(t_philo *philo)
 static void	go_think(t_philo *philo)
 {
 	print_action(philo, THINKING);
-	usleep(100);
+	usleep(500);
 }
 
 void	*actions(void *ptr)
