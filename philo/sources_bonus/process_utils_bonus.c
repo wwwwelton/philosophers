@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 15:45:51 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 20:15:56 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ int	process_join(t_philo *philos)
 		exit_code = WEXITSTATUS(exit_code);
 	}
 	if (exit_code)
+	{
+		i = -1;
 		while (++i < philos->data->number_of_philos)
 			kill(philos[i].process, SIGKILL);
+	}
 	return (exit_code);
 }
 
