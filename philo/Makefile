@@ -37,7 +37,7 @@ $(OBJ_DIR)/%.o:		$(BONUS_DIR)/%.c $(HEADER_BONUS)
 
 all:				$(NAME)
 
-bonus:				$(NAME_BONUS)
+bonus:				fclean $(NAME_BONUS)
 
 $(NAME):			$(OBJ_DIR) $(OBJECTS) $(HEADER)
 					$(CC) $(CFLAGS) $(OBJECTS) $(LDFLAGS) -o $(NAME)

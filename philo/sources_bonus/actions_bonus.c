@@ -6,18 +6,18 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 07:56:08 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 03:36:30 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 03:49:07 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-static void	*go_eat_alone(t_philo *philo)
+static int	go_eat_alone(t_philo *philo)
 {
 	sem_wait(philo->fork_right);
 	print_action(philo, TOOK_A_FORK);
 	sem_post(philo->fork_right);
-	return (NULL);
+	return (1);
 }
 
 static void	go_eat(t_philo *philo)
@@ -52,7 +52,7 @@ static void	go_think(t_philo *philo)
 	usleep(100);
 }
 
-void	*actions(void *ptr)
+int	actions(void *ptr)
 {
 	t_philo	*philo;
 
@@ -65,9 +65,9 @@ void	*actions(void *ptr)
 	{
 		go_eat(philo);
 		if (philo->meals == philo->data->times_must_eat)
-			return (NULL);
+			return (0);
 		go_sleep(philo);
 		go_think(philo);
 	}
-	return (NULL);
+	return (0);
 }

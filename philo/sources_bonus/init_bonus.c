@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 03:35:25 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 03:49:59 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_data(t_data *data, sem_t **forks, t_philo **philos)
 	if (data->writing == NULL)
 	{
 		printf("Failed to create semaphore!\n");
-		exit_philo (data, *forks, *philos);
+		exit_philo (data, *forks, *philos, 1);
 	}
 }
 
@@ -51,7 +51,7 @@ void	init_forks(int n, t_data *data, sem_t **forks, t_philo **philos)
 	if (forks == NULL)
 	{
 		printf("Failed to create semaphore!\n");
-		exit_philo (data, *forks, *philos);
+		exit_philo (data, *forks, *philos, 1);
 	}
 }
 
@@ -63,7 +63,7 @@ void	init_philos(int n, t_data *data, sem_t **forks, t_philo **philos)
 	if (*philos == NULL)
 	{
 		printf("Failed to alloc philosophers!\n");
-		exit_philo (data, *forks, *philos);
+		exit_philo (data, *forks, *philos, 1);
 	}
 	i = -1;
 	while (++i < n)

@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 03:16:34 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 03:42:52 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,4 @@ void	print_action(t_philo *philo, int action)
 	else if (action == DIED)
 		printf("%5ld %3d died\n", current_time, philo->name);
 	sem_post(philo->data->writing);
-}
-
-void	fork_reopen(t_philo *philo)
-{
-	philo->forks = sem_open("/forks", 0);
 }
