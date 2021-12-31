@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 15:46:08 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 16:45:53 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 # define PHILOSOPHERS_BONUS_H
 
 # include <errno.h>
+# include <fcntl.h>
 # include <pthread.h>
+# include <semaphore.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <sys/time.h>
-# include <unistd.h>
-# include <fcntl.h>
 # include <sys/stat.h>
-# include <semaphore.h>
+# include <sys/time.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include <signal.h>
+# include <unistd.h>
 
 # define TOOK_A_FORK 1
 # define EATING 2
