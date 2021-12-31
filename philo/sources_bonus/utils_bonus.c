@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 03:42:52 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 03:59:43 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void	print_action(t_philo *philo, int action)
 
 	sem_wait(philo->data->writing);
 	current_time = timenow(philo->data->firststamp);
-	if (action == TOOK_A_FORK && !philo->data->dinner_is_over)
+	if (action == TOOK_A_FORK)
 		printf("%5ld %3d has taken a fork\n", current_time, philo->name);
-	else if (action == EATING && !philo->data->dinner_is_over)
+	else if (action == EATING)
 		printf("%5ld %3d is eating\n", current_time, philo->name);
-	else if (action == SLEEPING && !philo->data->dinner_is_over)
+	else if (action == SLEEPING)
 		printf("%5ld %3d is sleeping\n", current_time, philo->name);
-	else if (action == THINKING && !philo->data->dinner_is_over)
+	else if (action == THINKING)
 		printf("%5ld %3d is thinking\n", current_time, philo->name);
 	else if (action == DIED)
 		printf("%5ld %3d died\n", current_time, philo->name);
