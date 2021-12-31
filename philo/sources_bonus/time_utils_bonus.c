@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 21:25:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 16:33:55 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 18:16:11 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	tsleep(t_philo *philo)
 {
 	long	current_time;
 
+	usleep(500);
 	while (*(long *)philo->forks < 2)
 	{
 		current_time = timenow(philo->data->firststamp);
