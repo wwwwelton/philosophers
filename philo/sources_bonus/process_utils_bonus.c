@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 05:15:26 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 15:45:51 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,8 @@ int	process_create(pid_t *process, int (*f)(void *), t_philo *philo)
 		exit_code = f(philo);
 		exit_philo(philo->data, philo->forks, philo->philos, exit_code);
 	}
-	return (*process);
+	return (exit_code);
 }
-
-// int	process_join(t_philo *philos)
-// {
-// 	int	i;
-// 	int	exit_code;
-
-// 	i = -1;
-// 	exit_code = -1;
-// 	while(exit_code == -1)
-// 	{
-// 		waitpid(-1, &exit_code, 0);
-// 		if (WIFEXITED(exit_code))
-// 			exit_code = WEXITSTATUS(exit_code);
-// 	}
-// 	if (exit_code)
-// 		while (++i < philos->data->number_of_philos)
-// 			kill(philos[i].process, SIGKILL);
-// 	return (exit_code);
-// }
 
 int	process_join(t_philo *philos)
 {
@@ -56,14 +37,10 @@ int	process_join(t_philo *philos)
 	{
 		waitpid(-1, &exit_code, 0);
 		exit_code = WEXITSTATUS(exit_code);
-		if (exit_code)
-		{
-			i = -1;
-			while (++i < philos->data->number_of_philos)
-				kill(philos[i].process, SIGKILL);
-			break ;
-		}
 	}
+	if (exit_code)
+		while (++i < philos->data->number_of_philos)
+			kill(philos[i].process, SIGKILL);
 	return (exit_code);
 }
 

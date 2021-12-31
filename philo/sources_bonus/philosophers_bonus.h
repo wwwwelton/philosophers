@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 06:25:44 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 15:46:08 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define EATING 2
 # define SLEEPING 3
 # define THINKING 4
+# define DIED 5
 
 typedef struct s_data
 {
@@ -60,6 +61,8 @@ int		ft_atoi(const char *nptr);
 long	ft_atol(const char *nptr);
 int		ft_isdigit(int c);
 int		actions(void *ptr);
+int		process_create(pid_t *process, int (*f)(void *), t_philo *philo);
+int		process_join(t_philo *philos);
 int		start_philosophers(int n, t_philo *philos);
 long	timenow(long firststamp);
 long	timestamp(void);
@@ -70,12 +73,9 @@ void	init_args(int argc, char **argv, t_data *data);
 void	init_data(t_data *data, sem_t **forks, t_philo **philos);
 void	init_forks(int n, t_data *data, sem_t **forks, t_philo **philos);
 void	init_philos(int n, t_data *data, sem_t **forks, t_philo **philos);
+void	dsleep(int time_in_ms, t_philo *philo);
 void	msleep(int time_in_ms);
+void	tsleep(t_philo *philo);
 void	print_action(t_philo *philo, int action);
-
-int		process_create(pid_t *process, int (*f)(void *), t_philo *philo);
-int		process_join(t_philo *philos);
-int		msleep_of_death(int time_in_ms, t_philo *philo);
-void	print_dead_action(t_philo *philo);
 
 #endif

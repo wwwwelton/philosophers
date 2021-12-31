@@ -6,36 +6,11 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 21:25:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 07:00:53 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 15:32:17 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
-
-void	msleep(int time_in_ms)
-{
-	long	start_time;
-
-	start_time = timestamp();
-	while ((timestamp() - start_time) < (long)time_in_ms)
-		usleep(10);
-}
-
-int	msleep_of_death(int time_in_ms, t_philo *philo)
-{
-	long	current_time;
-	long	start_time;
-
-	start_time = timestamp();
-	while ((timestamp() - start_time) < (long)time_in_ms)
-	{
-		current_time = timenow(philo->data->firststamp);
-		if ((current_time - philo->lastsupper) > philo->data->time_to_die)
-			return (1);
-		usleep(10);
-	}
-	return (0);
-}
 
 long	timestamp(void)
 {
@@ -48,4 +23,52 @@ long	timestamp(void)
 long	timenow(long firststamp)
 {
 	return (timestamp() - firststamp);
+}
+
+void	dsleep(int time_in_ms, t_philo *philo)
+{
+	long	current_time;
+	long	start_time;
+
+	start_time = timestamp();
+	while ((timestamp() - start_time) < (long)time_in_ms)
+	{
+		current_time = timenow(philo->data->firststamp);
+		if ((current_time - philo->lastsupper) > philo->data->time_to_die)
+		{
+			print_action(philo, DIED);
+			exit_philo(philo->data, philo->forks, philo->philos, 1);
+		}
+		usleep(10);
+	}
+	if (philo->data->alone)
+	{
+		print_action(philo, DIED);
+		exit_philo(philo->data, philo->forks, philo->philos, 1);
+	}
+}
+
+void	msleep(int time_in_ms)
+{
+	long	start_time;
+
+	start_time = timestamp();
+	while ((timestamp() - start_time) < (long)time_in_ms)
+		usleep(10);
+}
+
+void	tsleep(t_philo *philo)
+{
+	long		current_time;
+
+	while (philo->forks->__align < 2)
+	{
+		current_time = timenow(philo->data->firststamp);
+		if ((current_time - philo->lastsupper) > philo->data->time_to_die)
+		{
+			print_action(philo, DIED);
+			exit_philo(philo->data, philo->forks, philo->philos, 1);
+		}
+		usleep(10);
+	}
 }
