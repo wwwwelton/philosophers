@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 21:25:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 06:09:14 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 07:00:53 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,6 @@ int	msleep_of_death(int time_in_ms, t_philo *philo)
 	}
 	return (0);
 }
-
-// int	check_if_death(t_philo *philo)
-// {
-// 	long	current_time;
-
-// 	current_time = timenow(philo->data->firststamp);
-// 	if ((current_time - philo->lastsupper) > philo->data->time_to_die)
-// 		return (1);
-// 	return (0);
-// }
 
 long	timestamp(void)
 {

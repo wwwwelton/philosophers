@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 06:09:20 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 06:25:44 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,5 @@ int		process_create(pid_t *process, int (*f)(void *), t_philo *philo);
 int		process_join(t_philo *philos);
 int		msleep_of_death(int time_in_ms, t_philo *philo);
 void	print_dead_action(t_philo *philo);
-
-// int		check_if_death(t_philo *philo);
 
 #endif
