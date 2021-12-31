@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   process_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/24 22:46:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 01:18:23 by wleite           ###   ########.fr       */
+/*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
+/*   Updated: 2021/12/31 03:07:31 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-int	main(int argc, char **argv)
+int	process_create(pid_t *process, void *(*f)(void *), t_philo *philo)
 {
-	t_data	data;
-	sem_t	*forks;
-	t_philo	*philos;
+	*process = fork();
+	if (*process == 0)
+	{
+		fork_reopen(philo);
+		f(philo);
+		exit_philo(philo->data, philo->forks, philo->philos);
+	}
+	return (*process);
+}
 
-	init_args(argc, argv, &data);
-	init_data(&data, &forks, &philos);
-	init_forks(data.number_of_philos, &data, &forks, &philos);
-	init_philos(data.number_of_philos, &data, &forks, &philos);
-	start_philosophers(data.number_of_philos, philos);
-	deinit_philo(&data, forks, philos);
-	return (0);
+int	process_join()
+{
+	int	exit_code;
+
+	exit_code = 0;
+	waitpid(-1, &exit_code, 0);
+	if (WIFEXITED(exit_code))
+		exit_code = WEXITSTATUS(exit_code);
+	return (exit_code);
 }

@@ -4,7 +4,7 @@ SOURCES_FILES	+=	init.c main.c thread_utils.c time_utils.c utils.c
 SOURCES_BONUS	=	actions_bonus.c exit_bonus.c ft_atoi_bonus.c
 SOURCES_BONUS	+=	ft_atol_bonus.c ft_isdigit_bonus.c init_bonus.c
 SOURCES_BONUS	+=	main_bonus.c philosophers_bonus.h thread_utils_bonus.c
-SOURCES_BONUS	+=	time_utils_bonus.c utils_bonus.c
+SOURCES_BONUS	+=	time_utils_bonus.c utils_bonus.c process_utils_bonus.c
 
 SOURCES_DIR		=	sources
 BONUS_DIR		=	sources_bonus
@@ -26,7 +26,7 @@ NAME_BONUS		=	philo_bonus
 CC				=	gcc
 RM				=	rm -rf
 
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -g3
 LDFLAGS			=	-pthread
 
 $(OBJ_DIR)/%.o:		$(SOURCES_DIR)/%.c $(HEADER)

@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 07:56:08 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/30 22:19:26 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 03:12:46 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,27 @@
 
 static void	*go_eat_alone(t_philo *philo)
 {
-	pthread_mutex_lock(philo->fork_right);
+	sem_wait(philo->fork_right);
 	print_action(philo, TOOK_A_FORK);
-	pthread_mutex_unlock(philo->fork_right);
+	sem_post(philo->fork_right);
 	return (NULL);
 }
 
 static void	go_eat(t_philo *philo)
 {
-	pthread_mutex_lock(philo->fork_right);
-	pthread_mutex_lock(philo->fork_left);
+	int sval;
+
+	sem_getvalue(philo->forks, &sval);
+	printf("%d sem fork\n", sval);
+	sem_getvalue(philo->fork_right, &sval);
+	printf("%d sem raite\n", sval);
+	sem_wait(philo->fork_right);
+	sem_wait(philo->fork_left);
+	printf("%d quase forked\n", philo->name);
 	if (philo->data->dinner_is_over)
 	{
-		pthread_mutex_unlock(philo->fork_right);
-		pthread_mutex_unlock(philo->fork_left);
+		sem_post(philo->fork_right);
+		sem_post(philo->fork_left);
 		return ;
 	}
 	print_action(philo, TOOK_A_FORK);
@@ -35,8 +42,8 @@ static void	go_eat(t_philo *philo)
 	print_action(philo, EATING);
 	philo->lastsupper = timenow(philo->data->firststamp);
 	msleep(philo->data->time_to_eat);
-	pthread_mutex_unlock(philo->fork_right);
-	pthread_mutex_unlock(philo->fork_left);
+	sem_post(philo->fork_right);
+	sem_post(philo->fork_left);
 	philo->meals++;
 }
 
@@ -66,6 +73,7 @@ void	*actions(void *ptr)
 		go_eat(philo);
 		if (philo->meals == philo->data->times_must_eat)
 			return (NULL);
+		printf("%d\n", philo->name);
 		go_sleep(philo);
 		go_think(philo);
 	}

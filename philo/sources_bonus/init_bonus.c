@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/30 22:19:26 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 03:16:12 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,41 +24,36 @@ void	init_args(int argc, char **argv, t_data *data)
 		data->times_must_eat = ft_atoi(argv[5]);
 }
 
-void	init_data(t_data *data, pthread_mutex_t **forks, t_philo **philos)
+void	init_data(t_data *data, sem_t **forks, t_philo **philos)
 {
+	*forks = NULL;
+	*philos = NULL;
 	if (data->number_of_philos == 1)
 		data->alone = 1;
 	else
 		data->alone = 0;
 	data->dinner_is_over = 0;
 	data->firststamp = 0;
-	data->writing = (t_mutex *)malloc(sizeof(t_mutex) * 1);
+	data->writing = NULL;
+	data->writing = sem_open("/writing", O_CREAT, 0777, 1);
 	if (data->writing == NULL)
 	{
-		printf("Failed to alloc mutex!\n");
-		exit_philo (0, *forks, *philos);
+		printf("Failed to create semaphore!\n");
+		exit_philo (data, *forks, *philos);
 	}
-	pthread_mutex_init(data->writing, NULL);
-	*forks = NULL;
-	*philos = NULL;
 }
 
-void	init_forks(int n, t_mutex **forks, t_philo **philos)
+void	init_forks(int n, t_data *data, sem_t **forks, t_philo **philos)
 {
-	int	i;
-
-	*forks = (t_mutex *)malloc(sizeof(t_mutex) * n);
+	*forks = sem_open("/forks", O_CREAT, 0777, n);
 	if (forks == NULL)
 	{
-		printf("Failed to alloc forks!\n");
-		exit_philo (n, *forks, *philos);
+		printf("Failed to create semaphore!\n");
+		exit_philo (data, *forks, *philos);
 	}
-	i = -1;
-	while (++i < n)
-		pthread_mutex_init(&(*forks)[i], NULL);
 }
 
-void	init_philos(int n, t_data *data, t_mutex **forks, t_philo **philos)
+void	init_philos(int n, t_data *data, sem_t **forks, t_philo **philos)
 {
 	int	i;
 
@@ -66,17 +61,18 @@ void	init_philos(int n, t_data *data, t_mutex **forks, t_philo **philos)
 	if (*philos == NULL)
 	{
 		printf("Failed to alloc philosophers!\n");
-		exit_philo (n, *forks, *philos);
+		exit_philo (data, *forks, *philos);
 	}
 	i = -1;
 	while (++i < n)
 	{
-		(*philos)[i].fork_right = &(*forks)[i];
-		(*philos)[i].fork_left = &(*forks)[i + 1];
+		(*philos)[i].fork_right = *forks;
+		(*philos)[i].fork_left = *forks;
 		(*philos)[i].name = i + 1;
 		(*philos)[i].meals = 0;
 		(*philos)[i].lastsupper = 0;
+		(*philos)[i].forks = *forks;
 		(*philos)[i].data = data;
+		(*philos)[i].philos = *philos;
 	}
-	(*philos)[--i].fork_left = &(*forks)[0];
 }

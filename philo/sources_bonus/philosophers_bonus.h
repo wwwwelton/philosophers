@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/30 22:18:37 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 03:07:18 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
-
-typedef pthread_mutex_t	t_mutex;
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <semaphore.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <signal.h>
 
 # define TOOK_A_FORK 1
 # define EATING 2
@@ -38,7 +42,7 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				times_must_eat;
 	long			firststamp;
-	pthread_mutex_t	*writing;
+	sem_t			*writing;
 }	t_data;
 
 typedef struct s_philo
@@ -46,10 +50,12 @@ typedef struct s_philo
 	int				name;
 	int				meals;
 	long			lastsupper;
-	pthread_t		thread;
-	pthread_mutex_t	*fork_left;
-	pthread_mutex_t	*fork_right;
+	pid_t			process;
+	sem_t			*fork_left;
+	sem_t			*fork_right;
+	sem_t			*forks;
 	t_data			*data;
+	void			*philos;
 }	t_philo;
 
 int		ft_atoi(const char *nptr);
@@ -59,15 +65,19 @@ int		start_philosophers(int n, t_philo *philos);
 long	timenow(long firststamp);
 long	timestamp(void);
 void	check_args(int argc, char **argv);
-void	deinit_philo(int n, t_mutex *forks, t_philo *philos);
-void	exit_philo(int n, t_mutex *forks, t_philo *philos);
+void	deinit_philo(t_data *data, sem_t *forks, t_philo *philos);
+void	exit_philo(t_data *data, sem_t *forks, t_philo *philos);
 void	init_args(int argc, char **argv, t_data *data);
-void	init_data(t_data *data, pthread_mutex_t **forks, t_philo **philos);
-void	init_forks(int n, t_mutex **forks, t_philo **philos);
-void	init_philos(int n, t_data *data, t_mutex **forks, t_philo **philos);
+void	init_data(t_data *data, sem_t **forks, t_philo **philos);
+void	init_forks(int n, t_data *data, sem_t **forks, t_philo **philos);
+void	init_philos(int n, t_data *data, sem_t **forks, t_philo **philos);
 void	msleep(int time_in_ms);
 void	print_action(t_philo *philo, int action);
 void	*actions(void *ptr);
-void	*philosopher_monitor(void *ptr);
+// void	*philosopher_monitor(void *ptr);
+
+int		process_create(pid_t *process, void *(*f)(void *), t_philo *philo);
+int		process_join();
+void	fork_reopen(t_philo *philo);
 
 #endif
