@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 07:56:08 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 03:12:46 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 03:36:30 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,8 @@ static void	*go_eat_alone(t_philo *philo)
 
 static void	go_eat(t_philo *philo)
 {
-	int sval;
-
-	sem_getvalue(philo->forks, &sval);
-	printf("%d sem fork\n", sval);
-	sem_getvalue(philo->fork_right, &sval);
-	printf("%d sem raite\n", sval);
 	sem_wait(philo->fork_right);
 	sem_wait(philo->fork_left);
-	printf("%d quase forked\n", philo->name);
 	if (philo->data->dinner_is_over)
 	{
 		sem_post(philo->fork_right);
@@ -73,7 +66,6 @@ void	*actions(void *ptr)
 		go_eat(philo);
 		if (philo->meals == philo->data->times_must_eat)
 			return (NULL);
-		printf("%d\n", philo->name);
 		go_sleep(philo);
 		go_think(philo);
 	}

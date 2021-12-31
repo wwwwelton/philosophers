@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 03:16:12 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 03:35:25 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	init_args(int argc, char **argv, t_data *data)
 
 void	init_data(t_data *data, sem_t **forks, t_philo **philos)
 {
+	sem_unlink("/writing");
+	sem_unlink("/forks");
 	*forks = NULL;
 	*philos = NULL;
 	if (data->number_of_philos == 1)
