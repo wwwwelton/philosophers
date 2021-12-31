@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 21:25:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 15:32:17 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 16:33:55 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	dsleep(int time_in_ms, t_philo *philo)
 	}
 	if (philo->data->alone)
 	{
+		msleep(1);
 		print_action(philo, DIED);
 		exit_philo(philo->data, philo->forks, philo->philos, 1);
 	}
@@ -59,9 +60,9 @@ void	msleep(int time_in_ms)
 
 void	tsleep(t_philo *philo)
 {
-	long		current_time;
+	long	current_time;
 
-	while (philo->forks->__align < 2)
+	while (*(long *)philo->forks < 2)
 	{
 		current_time = timenow(philo->data->firststamp);
 		if ((current_time - philo->lastsupper) > philo->data->time_to_die)
