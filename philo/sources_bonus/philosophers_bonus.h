@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 03:53:56 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 06:09:20 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@
 # define EATING 2
 # define SLEEPING 3
 # define THINKING 4
-# define DIED 5
 
 typedef struct s_data
 {
 	int				alone;
 	int				number_of_philos;
-	int				dinner_is_over;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
@@ -76,6 +74,10 @@ void	msleep(int time_in_ms);
 void	print_action(t_philo *philo, int action);
 
 int		process_create(pid_t *process, int (*f)(void *), t_philo *philo);
-int		process_join(void);
+int		process_join(t_philo *philos);
+int		msleep_of_death(int time_in_ms, t_philo *philo);
+void	print_dead_action(t_philo *philo);
+
+// int		check_if_death(t_philo *philo);
 
 #endif

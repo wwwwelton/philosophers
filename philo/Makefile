@@ -3,8 +3,8 @@ SOURCES_FILES	+=	init.c main.c thread_utils.c time_utils.c utils.c
 
 SOURCES_BONUS	=	actions_bonus.c exit_bonus.c ft_atoi_bonus.c
 SOURCES_BONUS	+=	ft_atol_bonus.c ft_isdigit_bonus.c init_bonus.c
-SOURCES_BONUS	+=	main_bonus.c philosophers_bonus.h thread_utils_bonus.c
-SOURCES_BONUS	+=	time_utils_bonus.c utils_bonus.c process_utils_bonus.c
+SOURCES_BONUS	+=	main_bonus.c time_utils_bonus.c utils_bonus.c
+SOURCES_BONUS	+=	process_utils_bonus.c
 
 SOURCES_DIR		=	sources
 BONUS_DIR		=	sources_bonus

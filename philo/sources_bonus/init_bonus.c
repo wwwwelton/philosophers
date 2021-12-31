@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 03:49:59 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 04:58:03 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	init_data(t_data *data, sem_t **forks, t_philo **philos)
 		data->alone = 1;
 	else
 		data->alone = 0;
-	data->dinner_is_over = 0;
 	data->firststamp = 0;
 	data->writing = NULL;
 	data->writing = sem_open("/writing", O_CREAT, 0777, 1);

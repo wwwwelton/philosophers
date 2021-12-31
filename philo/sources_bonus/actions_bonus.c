@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 07:56:08 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 04:02:07 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 06:09:54 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	go_eat_alone(t_philo *philo)
 	sem_wait(philo->fork_right);
 	print_action(philo, TOOK_A_FORK);
 	msleep(philo->data->time_to_die);
-	print_action(philo, DIED);
+	print_dead_action(philo);
 	sem_post(philo->fork_right);
 	return (1);
 }
@@ -26,17 +26,15 @@ static void	go_eat(t_philo *philo)
 {
 	sem_wait(philo->fork_right);
 	sem_wait(philo->fork_left);
-	if (philo->data->dinner_is_over)
-	{
-		sem_post(philo->fork_right);
-		sem_post(philo->fork_left);
-		return ;
-	}
 	print_action(philo, TOOK_A_FORK);
 	print_action(philo, TOOK_A_FORK);
 	print_action(philo, EATING);
 	philo->lastsupper = timenow(philo->data->firststamp);
-	msleep(philo->data->time_to_eat);
+	if (msleep_of_death(philo->data->time_to_eat, philo))
+	{
+		print_dead_action(philo);
+		exit_philo(philo->data, philo->forks, philo->philos, 1);
+	}
 	sem_post(philo->fork_right);
 	sem_post(philo->fork_left);
 	philo->meals++;
@@ -45,7 +43,11 @@ static void	go_eat(t_philo *philo)
 static void	go_sleep(t_philo *philo)
 {
 	print_action(philo, SLEEPING);
-	msleep(philo->data->time_to_sleep);
+	if (msleep_of_death(philo->data->time_to_sleep, philo))
+	{
+		print_dead_action(philo);
+		exit_philo(philo->data, philo->forks, philo->philos, 1);
+	}
 }
 
 static void	go_think(t_philo *philo)
@@ -63,11 +65,11 @@ int	actions(void *ptr)
 		msleep(5);
 	if (philo->data->alone)
 		return (go_eat_alone(philo));
-	while (!philo->data->dinner_is_over)
+	while (1)
 	{
 		go_eat(philo);
 		if (philo->meals == philo->data->times_must_eat)
-			return (0);
+			exit_philo(philo->data, philo->forks, philo->philos, 0);
 		go_sleep(philo);
 		go_think(philo);
 	}

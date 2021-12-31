@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 03:59:43 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 04:32:16 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,14 @@ void	print_action(t_philo *philo, int action)
 		printf("%5ld %3d is sleeping\n", current_time, philo->name);
 	else if (action == THINKING)
 		printf("%5ld %3d is thinking\n", current_time, philo->name);
-	else if (action == DIED)
-		printf("%5ld %3d died\n", current_time, philo->name);
 	sem_post(philo->data->writing);
+}
+
+void	print_dead_action(t_philo *philo)
+{
+	long	current_time;
+
+	sem_wait(philo->data->writing);
+	current_time = timenow(philo->data->firststamp);
+	printf("%5ld %3d died\n", current_time, philo->name);
 }
