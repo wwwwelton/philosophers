@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 07:56:08 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 03:49:07 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 04:02:07 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int	go_eat_alone(t_philo *philo)
 {
 	sem_wait(philo->fork_right);
 	print_action(philo, TOOK_A_FORK);
+	msleep(philo->data->time_to_die);
+	print_action(philo, DIED);
 	sem_post(philo->fork_right);
 	return (1);
 }
@@ -57,7 +59,7 @@ int	actions(void *ptr)
 	t_philo	*philo;
 
 	philo = (t_philo *)ptr;
-	if (philo->name % 2)
+	if (philo->name % 2 == 0)
 		msleep(5);
 	if (philo->data->alone)
 		return (go_eat_alone(philo));
