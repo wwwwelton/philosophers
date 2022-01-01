@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 04:58:03 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 22:09:39 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	init_data(t_data *data, sem_t **forks, t_philo **philos)
 void	init_forks(int n, t_data *data, sem_t **forks, t_philo **philos)
 {
 	*forks = sem_open("/forks", O_CREAT, 0777, n);
-	if (forks == NULL)
+	if (*forks == NULL)
 	{
 		printf("Failed to create semaphore!\n");
 		exit_philo (data, *forks, *philos, 1);
