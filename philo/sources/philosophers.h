@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 20:41:15 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 21:56:48 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int		start_philosophers(int n, t_philo *philos);
 long	timenow(long firststamp);
 long	timestamp(void);
 void	check_args(int argc, char **argv);
-void	deinit_philo(int n, t_mutex *forks, t_philo *philos);
-void	exit_philo(int n, t_mutex *forks, t_philo *philos);
+void	deinit_philo(int n, t_data *data, t_mutex *forks, t_philo *philos);
+void	exit_philo(int n, t_data *data, t_mutex *forks, t_philo *philos);
 void	init_args(int argc, char **argv, t_data *data);
 void	init_data(t_data *data, pthread_mutex_t **forks, t_philo **philos);
-void	init_forks(int n, t_mutex **forks, t_philo **philos);
+void	init_forks(int n, t_data *data, t_mutex **forks, t_philo **philos);
 void	init_philos(int n, t_data *data, t_mutex **forks, t_philo **philos);
 void	msleep(int time_in_ms);
 void	print_action(t_philo *philo, int action);

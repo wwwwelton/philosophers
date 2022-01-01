@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 03:06:28 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 22:06:20 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	init_args(int argc, char **argv, t_data *data)
 
 void	init_data(t_data *data, pthread_mutex_t **forks, t_philo **philos)
 {
+	*forks = NULL;
+	*philos = NULL;
 	if (data->number_of_philos == 1)
 		data->alone = 1;
 	else
@@ -36,22 +38,20 @@ void	init_data(t_data *data, pthread_mutex_t **forks, t_philo **philos)
 	if (data->writing == NULL)
 	{
 		printf("Failed to alloc mutex!\n");
-		exit_philo (0, *forks, *philos);
+		exit_philo (0, data, *forks, *philos);
 	}
 	pthread_mutex_init(data->writing, NULL);
-	*forks = NULL;
-	*philos = NULL;
 }
 
-void	init_forks(int n, t_mutex **forks, t_philo **philos)
+void	init_forks(int n, t_data *data, t_mutex **forks, t_philo **philos)
 {
 	int	i;
 
 	*forks = (t_mutex *)malloc(sizeof(t_mutex) * n);
-	if (forks == NULL)
+	if (*forks == NULL)
 	{
 		printf("Failed to alloc forks!\n");
-		exit_philo (n, *forks, *philos);
+		exit_philo (n, data, *forks, *philos);
 	}
 	i = -1;
 	while (++i < n)
@@ -66,7 +66,7 @@ void	init_philos(int n, t_data *data, t_mutex **forks, t_philo **philos)
 	if (*philos == NULL)
 	{
 		printf("Failed to alloc philosophers!\n");
-		exit_philo (n, *forks, *philos);
+		exit_philo (n, data, *forks, *philos);
 	}
 	i = -1;
 	while (++i < n)
