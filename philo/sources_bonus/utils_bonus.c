@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 14:07:08 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 22:23:53 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,20 @@ void	print_action(t_philo *philo, int action)
 		printf("%5ld %3d died\n", current_time, philo->name);
 	if (action != DIED)
 		sem_post(philo->data->writing);
+}
+
+void	sem_try_wait(t_philo *philo)
+{
+	long	current_time;
+
+	while (*(long *)philo->forks < 2)
+	{
+		current_time = timenow(philo->data->firststamp);
+		if ((current_time - philo->lastsupper) > philo->data->time_to_die)
+		{
+			print_action(philo, DIED);
+			exit_philo(philo->data, philo->forks, philo->philos, 1);
+		}
+		usleep(10);
+	}
 }

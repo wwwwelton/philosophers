@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 16:45:53 by wleite           ###   ########.fr       */
+/*   Updated: 2021/12/31 22:14:37 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	init_forks(int n, t_data *data, sem_t **forks, t_philo **philos);
 void	init_philos(int n, t_data *data, sem_t **forks, t_philo **philos);
 void	dsleep(int time_in_ms, t_philo *philo);
 void	msleep(int time_in_ms);
-void	tsleep(t_philo *philo);
+void	sem_try_wait(t_philo *philo);
 void	print_action(t_philo *philo, int action);
 
 #endif
