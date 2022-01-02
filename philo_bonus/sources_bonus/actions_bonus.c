@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 07:56:08 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 22:24:38 by wleite           ###   ########.fr       */
+/*   Updated: 2022/01/01 23:15:32 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	go_eat_alone(t_philo *philo)
 
 static void	go_eat(t_philo *philo)
 {
-	sem_try_wait(philo);
 	sem_wait(philo->fork_right);
 	sem_wait(philo->fork_left);
 	print_action(philo, TOOK_A_FORK);
@@ -44,6 +43,7 @@ static void	go_think(t_philo *philo)
 {
 	print_action(philo, THINKING);
 	usleep(500);
+	sem_try_wait(philo);
 }
 
 int	actions(void *ptr)
