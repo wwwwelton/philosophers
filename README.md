@@ -72,7 +72,14 @@ All arguments working with mandatory and bonus
 <table>
     <thead>
         <tr>
-            <th colspan=5><h4>Parameters</h4></th>
+            <th colspan=5><h4>Arguments Usage</h4></th>
+        </tr>
+        <tr>
+            <th>#1</th>
+            <th>#2</th>
+            <th>#3</th>
+            <th>#4</th>
+            <th>#5</th>
         </tr>
         <tr>
             <td align="center">5</td>
@@ -82,11 +89,11 @@ All arguments working with mandatory and bonus
             <td align="center">10</td>
         </tr>
         <tr>
-            <th>number_of_philosophers</th>
-            <th>time_to_die</th>
-            <th>time_to_eat</th>
-            <th>time_to_sleep</th>
-            <th>*number_of_times_each_must_eat</th>
+            <td align="center"><strong>number_of_philosophers</strong></strong></td>
+            <td align="center"><strong>time_to_die</strong></td>
+            <td align="center"><strong>time_to_eat</strong></td>
+            <td align="center"><strong>time_to_sleep</strong></td>
+            <td align="center"><strong>*number_of_times_each_must_eat</strong></td>
         </tr>
     </thead>
     <tbody>
