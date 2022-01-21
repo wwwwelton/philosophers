@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 22:06:20 by wleite           ###   ########.fr       */
+/*   Updated: 2022/01/21 03:49:12 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ void	init_data(t_data *data, pthread_mutex_t **forks, t_philo **philos)
 	data->dinner_is_over = 0;
 	data->firststamp = 0;
 	data->writing = (t_mutex *)malloc(sizeof(t_mutex) * 1);
-	if (data->writing == NULL)
+	data->dining = (t_mutex *)malloc(sizeof(t_mutex) * 1);
+	if (data->writing == NULL || data->dining == NULL)
 	{
 		printf("Failed to alloc mutex!\n");
 		exit_philo (0, data, *forks, *philos);
 	}
 	pthread_mutex_init(data->writing, NULL);
+	pthread_mutex_init(data->dining, NULL);
 }
 
 void	init_forks(int n, t_data *data, t_mutex **forks, t_philo **philos)

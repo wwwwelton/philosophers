@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/29 20:25:18 by wleite           ###   ########.fr       */
+/*   Updated: 2022/01/21 04:03:45 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,27 @@ void	check_args(int argc, char **argv)
 	else
 		return ;
 	exit (EXIT_FAILURE);
+}
+
+int	dinner_is_over(t_philo *philo)
+{
+	pthread_mutex_lock(philo->data->dining);
+	if (philo->data->dinner_is_over)
+	{
+		pthread_mutex_unlock(philo->fork_right);
+		pthread_mutex_unlock(philo->fork_left);
+		pthread_mutex_unlock(philo->data->dining);
+		return (1);
+	}
+	pthread_mutex_unlock(philo->data->dining);
+	return (0);
+}
+
+void	finish_dinner(t_philo *philo)
+{
+	pthread_mutex_lock(philo->data->dining);
+	philo->data->dinner_is_over = 1;
+	pthread_mutex_unlock(philo->data->dining);
 }
 
 void	print_action(t_philo *philo, int action)

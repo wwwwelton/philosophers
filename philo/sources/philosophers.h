@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 21:56:48 by wleite           ###   ########.fr       */
+/*   Updated: 2022/01/21 04:04:13 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_data
 	int				times_must_eat;
 	long			firststamp;
 	pthread_mutex_t	*writing;
+	pthread_mutex_t	*dining;
 }	t_data;
 
 typedef struct s_philo
@@ -55,12 +56,14 @@ typedef struct s_philo
 int		ft_atoi(const char *nptr);
 long	ft_atol(const char *nptr);
 int		ft_isdigit(int c);
+int		dinner_is_over(t_philo *philo);
 int		start_philosophers(int n, t_philo *philos);
 long	timenow(long firststamp);
 long	timestamp(void);
 void	check_args(int argc, char **argv);
 void	deinit_philo(int n, t_data *data, t_mutex *forks, t_philo *philos);
 void	exit_philo(int n, t_data *data, t_mutex *forks, t_philo *philos);
+void	finish_dinner(t_philo *philo);
 void	init_args(int argc, char **argv, t_data *data);
 void	init_data(t_data *data, pthread_mutex_t **forks, t_philo **philos);
 void	init_forks(int n, t_data *data, t_mutex **forks, t_philo **philos);
