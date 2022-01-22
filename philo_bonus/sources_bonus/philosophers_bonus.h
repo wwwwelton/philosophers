@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 22:14:37 by wleite           ###   ########.fr       */
+/*   Updated: 2022/01/22 13:39:21 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				times_must_eat;
 	long			firststamp;
-	sem_t			*writing;
+	sem_t			*lock_print;
 }	t_data;
 
 typedef struct s_philo

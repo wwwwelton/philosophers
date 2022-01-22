@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 22:09:39 by wleite           ###   ########.fr       */
+/*   Updated: 2022/01/22 13:39:21 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_args(int argc, char **argv, t_data *data)
 
 void	init_data(t_data *data, sem_t **forks, t_philo **philos)
 {
-	sem_unlink("/writing");
+	sem_unlink("/lock_print");
 	sem_unlink("/forks");
 	*forks = NULL;
 	*philos = NULL;
@@ -35,9 +35,9 @@ void	init_data(t_data *data, sem_t **forks, t_philo **philos)
 	else
 		data->alone = 0;
 	data->firststamp = 0;
-	data->writing = NULL;
-	data->writing = sem_open("/writing", O_CREAT, 0777, 1);
-	if (data->writing == NULL)
+	data->lock_print = NULL;
+	data->lock_print = sem_open("/lock_print", O_CREAT, 0777, 1);
+	if (data->lock_print == NULL)
 	{
 		printf("Failed to create semaphore!\n");
 		exit_philo (data, *forks, *philos, 1);

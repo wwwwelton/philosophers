@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2022/01/21 03:49:12 by wleite           ###   ########.fr       */
+/*   Updated: 2022/01/22 13:39:37 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ void	init_data(t_data *data, pthread_mutex_t **forks, t_philo **philos)
 		data->alone = 0;
 	data->dinner_is_over = 0;
 	data->firststamp = 0;
-	data->writing = (t_mutex *)malloc(sizeof(t_mutex) * 1);
-	data->dining = (t_mutex *)malloc(sizeof(t_mutex) * 1);
-	if (data->writing == NULL || data->dining == NULL)
+	data->lock_print = (t_mutex *)malloc(sizeof(t_mutex) * 1);
+	data->lock_dinner = (t_mutex *)malloc(sizeof(t_mutex) * 1);
+	if (data->lock_print == NULL || data->lock_dinner == NULL)
 	{
 		printf("Failed to alloc mutex!\n");
 		exit_philo (0, data, *forks, *philos);
 	}
-	pthread_mutex_init(data->writing, NULL);
-	pthread_mutex_init(data->dining, NULL);
+	pthread_mutex_init(data->lock_print, NULL);
+	pthread_mutex_init(data->lock_dinner, NULL);
 }
 
 void	init_forks(int n, t_data *data, t_mutex **forks, t_philo **philos)

@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2021/12/31 22:23:53 by wleite           ###   ########.fr       */
+/*   Updated: 2022/01/22 13:39:21 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	print_action(t_philo *philo, int action)
 {
 	long	current_time;
 
-	sem_wait(philo->data->writing);
+	sem_wait(philo->data->lock_print);
 	current_time = timenow(philo->data->firststamp);
 	if (action == TOOK_A_FORK)
 		printf("%5ld %3d has taken a fork\n", current_time, philo->name);
@@ -58,7 +58,7 @@ void	print_action(t_philo *philo, int action)
 	else if (action == DIED)
 		printf("%5ld %3d died\n", current_time, philo->name);
 	if (action != DIED)
-		sem_post(philo->data->writing);
+		sem_post(philo->data->lock_print);
 }
 
 void	sem_try_wait(t_philo *philo)

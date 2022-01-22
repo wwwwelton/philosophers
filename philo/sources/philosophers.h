@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 22:45:19 by wleite            #+#    #+#             */
-/*   Updated: 2022/01/21 04:04:13 by wleite           ###   ########.fr       */
+/*   Updated: 2022/01/22 13:38:30 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				times_must_eat;
 	long			firststamp;
-	pthread_mutex_t	*writing;
-	pthread_mutex_t	*dining;
+	pthread_mutex_t	*lock_print;
+	pthread_mutex_t	*lock_dinner;
 }	t_data;
 
 typedef struct s_philo

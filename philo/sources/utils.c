@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2022/01/21 04:03:45 by wleite           ###   ########.fr       */
+/*   Updated: 2022/01/22 13:39:37 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,30 +43,30 @@ void	check_args(int argc, char **argv)
 
 int	dinner_is_over(t_philo *philo)
 {
-	pthread_mutex_lock(philo->data->dining);
+	pthread_mutex_lock(philo->data->lock_dinner);
 	if (philo->data->dinner_is_over)
 	{
 		pthread_mutex_unlock(philo->fork_right);
 		pthread_mutex_unlock(philo->fork_left);
-		pthread_mutex_unlock(philo->data->dining);
+		pthread_mutex_unlock(philo->data->lock_dinner);
 		return (1);
 	}
-	pthread_mutex_unlock(philo->data->dining);
+	pthread_mutex_unlock(philo->data->lock_dinner);
 	return (0);
 }
 
 void	finish_dinner(t_philo *philo)
 {
-	pthread_mutex_lock(philo->data->dining);
+	pthread_mutex_lock(philo->data->lock_dinner);
 	philo->data->dinner_is_over = 1;
-	pthread_mutex_unlock(philo->data->dining);
+	pthread_mutex_unlock(philo->data->lock_dinner);
 }
 
 void	print_action(t_philo *philo, int action)
 {
 	long	current_time;
 
-	pthread_mutex_lock(philo->data->writing);
+	pthread_mutex_lock(philo->data->lock_print);
 	current_time = timenow(philo->data->firststamp);
 	if (action == TOOK_A_FORK && !philo->data->dinner_is_over)
 		printf("%5ld %3d has taken a fork\n", current_time, philo->name);
@@ -78,5 +78,5 @@ void	print_action(t_philo *philo, int action)
 		printf("%5ld %3d is thinking\n", current_time, philo->name);
 	else if (action == DIED)
 		printf("%5ld %3d died\n", current_time, philo->name);
-	pthread_mutex_unlock(philo->data->writing);
+	pthread_mutex_unlock(philo->data->lock_print);
 }
