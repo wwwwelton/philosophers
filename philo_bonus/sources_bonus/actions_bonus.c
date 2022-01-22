@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 07:56:08 by wleite            #+#    #+#             */
-/*   Updated: 2022/01/01 23:15:32 by wleite           ###   ########.fr       */
+/*   Updated: 2022/01/22 12:29:40 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	go_eat(t_philo *philo)
 	print_action(philo, TOOK_A_FORK);
 	print_action(philo, EATING);
 	philo->lastsupper = timenow(philo->data->firststamp);
-	msleep(philo->data->time_to_eat);
+	dsleep(philo->data->time_to_eat, philo);
 	sem_post(philo->fork_right);
 	sem_post(philo->fork_left);
 	philo->meals++;
