@@ -4,7 +4,46 @@
 make -C philo && clear
 exe=./philo/philo
 
-tests=1
+tests=10
+
+x=1
+time=0.1
+echo -e "\e[41m 2 100 200 200 should die\e[0m"
+while [ $x -le $tests ]
+do
+	echo -e "\e[1;31mTest: $x\e[0m"
+	$exe 2 100 200 200 | grep die
+	sleep $time
+	x=$(( $x + 1 ))
+done
+
+echo
+
+x=1
+time=0.1
+echo -e "\e[41m 2 150 360 100 should die\e[0m"
+while [ $x -le $tests ]
+do
+	echo -e "\e[1;31mTest: $x\e[0m"
+	$exe 2 150 360 100 | grep die
+	sleep $time
+	x=$(( $x + 1 ))
+done
+
+echo
+
+x=1
+time=0.1
+echo -e "\e[41m 2 150 200 100 should die\e[0m"
+while [ $x -le $tests ]
+do
+	echo -e "\e[1;31mTest: $x\e[0m"
+	$exe 2 150 200 100 | grep die
+	sleep $time
+	x=$(( $x + 1 ))
+done
+
+echo
 
 x=1
 time=0.1
