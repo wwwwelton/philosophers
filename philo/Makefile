@@ -1,5 +1,6 @@
 SOURCES_FILES	=	actions.c exit.c ft_atoi.c ft_atol.c ft_isdigit.c
 SOURCES_FILES	+=	init.c main.c thread_utils.c time_utils.c utils.c
+SOURCES_FILES	+=	philo_utils.c
 
 SOURCES_DIR		=	sources
 

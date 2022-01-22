@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2022/01/21 04:04:45 by wleite           ###   ########.fr       */
+/*   Updated: 2022/01/22 15:45:30 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	all_philos_ate(t_philo *philos)
 	i = -1;
 	while (++i < philos->data->number_of_philos)
 	{
-		if (philos[i].meals == philos[i].data->times_must_eat)
+		if (get_meals(&philos[i]) == philos[i].data->times_must_eat)
 			had_dinner++;
 	}
 	if (had_dinner == philos->data->number_of_philos)
@@ -61,7 +61,7 @@ void	*philosopher_monitor(void *ptr)
 		while (++i < philos->data->number_of_philos)
 		{
 			current_time = timenow(philos->data->firststamp);
-			if ((current_time - philos[i].lastsupper) > time_to_die)
+			if ((current_time - get_lastsupper(&philos[i])) > time_to_die)
 			{
 				finish_dinner(&philos[i]);
 				print_action(&philos[i], DIED);

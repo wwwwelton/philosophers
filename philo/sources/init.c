@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/25 23:53:17 by wleite            #+#    #+#             */
-/*   Updated: 2022/01/22 13:39:37 by wleite           ###   ########.fr       */
+/*   Updated: 2022/01/22 14:55:36 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,14 @@ void	init_philos(int n, t_data *data, t_mutex **forks, t_philo **philos)
 	{
 		(*philos)[i].fork_right = &(*forks)[i];
 		(*philos)[i].fork_left = &(*forks)[i + 1];
+		(*philos)[i].lock_supper = (t_mutex *)malloc(sizeof(t_mutex) * 1);
+		(*philos)[i].lock_meals = (t_mutex *)malloc(sizeof(t_mutex) * 1);
 		(*philos)[i].name = i + 1;
 		(*philos)[i].meals = 0;
 		(*philos)[i].lastsupper = 0;
 		(*philos)[i].data = data;
+		pthread_mutex_init((*philos)[i].lock_supper, NULL);
+		pthread_mutex_init((*philos)[i].lock_meals, NULL);
 	}
 	(*philos)[--i].fork_left = &(*forks)[0];
 }

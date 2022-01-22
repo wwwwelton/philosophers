@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 00:03:42 by wleite            #+#    #+#             */
-/*   Updated: 2022/01/22 13:39:37 by wleite           ###   ########.fr       */
+/*   Updated: 2022/01/22 17:20:14 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,14 @@ void	check_args(int argc, char **argv)
 
 int	dinner_is_over(t_philo *philo)
 {
+	int	dinner_is_over;
+
 	pthread_mutex_lock(philo->data->lock_dinner);
+	dinner_is_over = 0;
 	if (philo->data->dinner_is_over)
-	{
-		pthread_mutex_unlock(philo->fork_right);
-		pthread_mutex_unlock(philo->fork_left);
-		pthread_mutex_unlock(philo->data->lock_dinner);
-		return (1);
-	}
+		dinner_is_over = philo->data->dinner_is_over;
 	pthread_mutex_unlock(philo->data->lock_dinner);
-	return (0);
+	return (dinner_is_over);
 }
 
 void	finish_dinner(t_philo *philo)
@@ -68,13 +66,13 @@ void	print_action(t_philo *philo, int action)
 
 	pthread_mutex_lock(philo->data->lock_print);
 	current_time = timenow(philo->data->firststamp);
-	if (action == TOOK_A_FORK && !philo->data->dinner_is_over)
+	if (action == TOOK_A_FORK && !dinner_is_over(philo))
 		printf("%5ld %3d has taken a fork\n", current_time, philo->name);
-	else if (action == EATING && !philo->data->dinner_is_over)
+	else if (action == EATING && !dinner_is_over(philo))
 		printf("%5ld %3d is eating\n", current_time, philo->name);
-	else if (action == SLEEPING && !philo->data->dinner_is_over)
+	else if (action == SLEEPING && !dinner_is_over(philo))
 		printf("%5ld %3d is sleeping\n", current_time, philo->name);
-	else if (action == THINKING && !philo->data->dinner_is_over)
+	else if (action == THINKING && !dinner_is_over(philo))
 		printf("%5ld %3d is thinking\n", current_time, philo->name);
 	else if (action == DIED)
 		printf("%5ld %3d died\n", current_time, philo->name);

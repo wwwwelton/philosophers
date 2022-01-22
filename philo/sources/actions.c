@@ -6,7 +6,7 @@
 /*   By: wleite <wleite@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 07:56:08 by wleite            #+#    #+#             */
-/*   Updated: 2022/01/21 20:21:16 by wleite           ###   ########.fr       */
+/*   Updated: 2022/01/22 17:20:20 by wleite           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,19 @@ static void	go_eat(t_philo *philo)
 	pthread_mutex_lock(philo->fork_right);
 	pthread_mutex_lock(philo->fork_left);
 	if (dinner_is_over(philo))
+	{
+		pthread_mutex_unlock(philo->fork_right);
+		pthread_mutex_unlock(philo->fork_left);
 		return ;
+	}
 	print_action(philo, TOOK_A_FORK);
 	print_action(philo, TOOK_A_FORK);
 	print_action(philo, EATING);
-	philo->lastsupper = timenow(philo->data->firststamp);
+	set_lastsupper(philo);
 	msleep(philo->data->time_to_eat);
 	pthread_mutex_unlock(philo->fork_right);
 	pthread_mutex_unlock(philo->fork_left);
-	philo->meals++;
+	set_meals(philo);
 }
 
 static void	go_sleep(t_philo *philo)
@@ -60,7 +64,7 @@ void	*actions(void *ptr)
 	while (!dinner_is_over(philo))
 	{
 		go_eat(philo);
-		if (philo->meals == philo->data->times_must_eat)
+		if (get_meals(philo) == philo->data->times_must_eat)
 			return (NULL);
 		go_sleep(philo);
 		go_think(philo);
