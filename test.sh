@@ -32,7 +32,7 @@ run_test_case() {
 	fi
 	
 	mkdir -p "$RESULTS_FOLDER/$CASE_NO"
-	echo -e "$FONT_COLOUR_BG $CASE $EXPECTED_OUTCOME\e[0m"
+	echo -e "$FONT_COLOUR_BG $CASE_NO: $CASE $EXPECTED_OUTCOME \e[0m"
 	while [ $i -le $NB_OF_TESTS ]
 	do
 		echo -e "$COLOUR_BG $i\e[0m"
